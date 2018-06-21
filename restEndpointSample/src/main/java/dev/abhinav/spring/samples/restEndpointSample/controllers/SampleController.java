@@ -19,9 +19,11 @@ import dev.abhinav.spring.samples.restEndpointSample.models.SamplePostCallRespon
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/samples")
+@Slf4j
 public class SampleController {
 
 	@ApiOperation(value = "", response = SampleGetCallResponseModel.class)
@@ -99,6 +101,9 @@ public class SampleController {
 		response.setPathParameters(pathParameters);
 		response.setQueryParameters(queryParameters);
 		response.setRequestBody(requestBody);
+		
+		log.info("returning response");
+		
 		return response;
 	}
 }
