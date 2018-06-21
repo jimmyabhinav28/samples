@@ -36,7 +36,7 @@ public class SampleController
     })
 //	Added the @ApiResponses()
 	@GetMapping(path="/getSampleEndpoint/{pathParameter1}/{pathParameter2}")
-	public SampleGetCallResponseModel showAllParametersInGetRequest(@RequestHeader HttpHeaders requestHeaders,@RequestParam Map<String,String> allQueryParameters,Model model, @PathVariable String pathParameter1,@PathVariable String pathParameter2)
+	public SampleGetCallResponseModel showAllParametersInGetRequest(@RequestHeader HttpHeaders requestHeaders,@RequestParam Map<String,String> allQueryParameters, @PathVariable String pathParameter1,@PathVariable String pathParameter2)
 	{
 		SampleGetCallResponseModel response=new SampleGetCallResponseModel();
 		ArrayList<Parameter> queryParameters=new ArrayList<Parameter>();
@@ -74,7 +74,7 @@ public class SampleController
     })
 //	Added the @ApiResponses()
 	@PostMapping(path="/postSampleEndpoint/{pathParameter1}/{pathParameter2}")
-	public SamplePostCallResponseModel showAllParametersInPostRequest(@RequestHeader HttpHeaders requestHeaders,@RequestParam Map<String,String> allQueryParameters,Model model, @PathVariable String pathParameter1,@PathVariable String pathParameter2, @RequestBody String requestBody)
+	public SamplePostCallResponseModel showAllParametersInPostRequest(@RequestHeader HttpHeaders requestHeaders,@RequestParam Map<String,String> allQueryParameters,@PathVariable String pathParameter1,@PathVariable String pathParameter2, @RequestBody String requestBody)
 	{
 		SamplePostCallResponseModel response=new SamplePostCallResponseModel();
 		ArrayList<Parameter> queryParameters=new ArrayList<Parameter>();
