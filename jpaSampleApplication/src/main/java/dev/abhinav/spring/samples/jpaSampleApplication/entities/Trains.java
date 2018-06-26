@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,7 +52,8 @@ public class Trains
 	//The one i am defining is bidirectional
 	//In bidirectional definition of two entities A and B, A will have instance(s)
 	//of B and B will have instance(s) of A
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="routeId") //note that we used the entity field  here
-	Routes routeId;
+	Routes route;
 }

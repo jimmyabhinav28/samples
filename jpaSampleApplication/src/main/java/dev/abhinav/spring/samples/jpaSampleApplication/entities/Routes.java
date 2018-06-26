@@ -14,6 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 import java.util.Set;
 
@@ -52,20 +56,23 @@ public class Routes
 	//the table related to this entity will not have a column for train
 	//hence you do not need a @JoinColumn here! Pretty easy to understand, eh! ;)
 	
-	@OneToMany
-	List<Trains> trainsOnThisRoute;
+	@JsonManagedReference
+	@OneToMany(mappedBy="route") //the field in the many side referring to this entity. This is absolutely necessary
+								//In absence of mappedBy hibernate forms query by assuming that an association table exists
+	List<Trains> trains;
 	
 	//Lets make route as the owner side of the relationship
 	//the owner side will specify the association table
-	//and the join and inverse join attributes in the join table
+	//and the join and inverse join attributes in the association table
 	//which attribute to make the join attribute and which attribute to make
 	//the inverse join attribute??
 	//the attribute referring to the owner side of the relationship will be
 	//the join attribute
 	//the other attribute will become the inverse join attribute
 	
+	@JsonManagedReference //necessary to resolve the circular reference in JSON conversion.
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST,CascadeType.MERGE})
-	@JoinTable(name="station_route_mapping", joinColumns= {@JoinColumn(name="route_id")},inverseJoinColumns= {@JoinColumn(name="stationid")})
+	@JoinTable(name="station_route_mapping", joinColumns= {@JoinColumn(name="route_id")},inverseJoinColumns= {@JoinColumn(name="station_id")})
 	private Set<Stations> stationsInThisRoute;
 	
 	

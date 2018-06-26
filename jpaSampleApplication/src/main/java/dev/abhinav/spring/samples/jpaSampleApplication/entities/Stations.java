@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,6 +47,7 @@ public class Stations
 	Integer numberOfPlatforms;
 	
 	//stations is the inverse entity in the many to many relationship between Stations and route
+	@JsonBackReference
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST,CascadeType.MERGE},mappedBy="stationsInThisRoute")
 	private Set<Routes> routesCrossinThisStation;
 }
